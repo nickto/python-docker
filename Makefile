@@ -1,6 +1,6 @@
 DOCKER_USER:=nickto
 DOCKER_ORGANIZATION=nickto
-DOCKER_IMAGE:=arch
+DOCKER_IMAGE:=python
 DOCKER_TAG:=$(git branch | grep \* | cut -d ' ' -f2)
 
 docker-image:
