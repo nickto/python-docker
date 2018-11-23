@@ -1,15 +1,15 @@
 FROM nickto/arch:yay
 
+# Otherwise mirrors are out of sync
+RUN pacman --noconfirm -Syu
+
 USER yay
 RUN yay --noconfirm -S python36
+USER root
+RUN ln -s /usr/bin/python3.6 /usr/bin/python
 
 # Set up pip for python 3.6
-USER root
-# RUN pacman --noconfirm -S python-pip
-# RUN python3.6 -m ensurepip --default-pip
-# RUN python3.6 -m easy_install pip
-# RUN python3.6 -m pip install --upgrade pip
-#
-# # Set python 3.6 as default python
-# RUN rm /usr/sbin/python
-# RUN ln -s /usr/bin/python3.6 /usr/sbin/python
+WORKDIR /tmp
+RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+RUN python /tmp/get-pip.py
+
